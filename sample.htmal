@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .contact-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .contact-container {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            padding: 20px;
+            text-align: center;
+            width: 400px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .contact-container:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+
+        .contact-container img {
+            width: 120px;
+            height: 120px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .contact-container img:hover {
+            transform: scale(1.2);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .contact-container h3 {
+            margin: 10px 0 5px;
+            font-size: 1.4em;
+            color: #333;
+        }
+
+        .contact-container p {
+            margin: 5px 0;
+            color: #555;
+        }
+
+        .contact-container .contact-info {
+            color: #777;
+            font-size: 0.9em;
+        }
+
+        /* Additional Styles for Colors */
+        .contact-container:nth-child(1) {
+            background-color: #FFEBEE;
+        }
+
+        .contact-container:nth-child(2) {
+            background-color: #E3F2FD;
+        }
+
+        .contact-container:nth-child(3) {
+            background-color: #E8F5E9;
+        }
+
+        .contact-container:nth-child(4) {
+            background-color: #FFF3E0;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="contact-wrapper">
+        <div class="contact-container">
+            <img src="path/to/photo1.jpg" alt="Member 1 Photo">
+            <h3>Member 1 Name</h3>
+            <p>E-Commerce Manager</p>
+            <p class="contact-info">Email: member1@example.com</p>
+            <p class="contact-info">Phone: (123) 456-7890</p>
+        </div>
+
+        <div class="contact-container">
+            <img src="path/to/photo2.jpg" alt="Member 2 Photo">
+            <h3>Member 2 Name</h3>
+            <p>Customer Service Representative</p>
+            <p class="contact-info">Email: member2@example.com</p>
+            <p class="contact-info">Phone: (234) 567-8901</p>
+        </div>
+
+        <div class="contact-container">
+            <img src="path/to/photo3.jpg" alt="Member 3 Photo">
+            <h3>Member 3 Name</h3>
+            <p>Content Creator</p>
+            <p class="contact-info">Email: member3@example.com</p>
+            <p class="contact-info">Phone: (345) 678-9012</p>
+        </div>
+
+        <div class="contact-container">
+            <img src="path/to/photo4.jpg" alt="Member 4 Photo">
+            <h3>Member 4 Name</h3>
+            <p>Inventory and Fulfillment Specialist</p>
+            <p class="contact-info">Email: member4@example.com</p>
+            <p class="contact-info">Phone: (456) 789-0123</p>
+        </div>
+    </div>
+
+</body>
+</html>

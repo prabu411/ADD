@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #278767b4;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .heading {
+            text-align: center;
+            margin-bottom: 20px;
+            color:black
+        }
+
+        .heading h1 {
+            font-size: 2em;
+            color: #333;
+        }
+
+        .heading p {
+            font-size: 1.2em;
+            color: #555;
+        }
+
+        .contact-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .contact-container {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            padding: 20px;
+            text-align: center;
+            width: 400px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .contact-container:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+
+        .contact-container img {
+            width: 120px;
+            height: 120px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .contact-container img:hover {
+            transform: scale(1.2);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .contact-container h3 {
+            margin: 10px 0 5px;
+            font-size: 1.4em;
+            color: #333;
+        }
+
+        .contact-container p {
+            margin: 5px 0;
+            color: #555;
+        }
+
+        .contact-container .contact-info {
+            color: #777;
+            font-size: 0.9em;
+        }
+
+        /* Additional Styles for Colors */
+        .contact-container:nth-child(1) {
+            background-color: #FFEBEE;
+        }
+
+        .contact-container:nth-child(2) {
+            background-color: #E3F2FD;
+        }
+
+        .contact-container:nth-child(3) {
+            background-color: #E8F5E9;
+        }
+
+        .contact-container:nth-child(4) {
+            background-color: #FFF3E0;
+        }
+    </style>
+</head>
+<body>
+
+    <header><b>"In a digital world, stationery reminds us of the power of tactile connections."</b></header>
+
+    <div class="heading">
+        <h1>Let's Connect</h1>
+        <p><b>"Your feedback is invaluable. Let’s work together to make things better!"</b></p>
+    </div>
+
+    <div class="contact-wrapper">
+        <div class="contact-container">
+            <img src="dhivya.jpg" alt="Member 1 Photo">
+            <h3>Dhivya</h3>
+            <p><b>E-Commerce Manager</b></p>
+            <p class="contact-info">Email: dhivya17@gmail.com</p>
+            <p class="contact-info">Phone: +91 9385567633</p>
+        </div>
+
+        <div class="contact-container">
+            <img src="aishwarya .jpg" alt="Member 2 Photo">
+            <h3>Aishwarya</h3>
+            <p><b>Social Media Manager</b></p>
+            <p class="contact-info">Email: aishwarya46@gmail.com</p>
+            <p class="contact-info">Phone: +91 7200195894</p>
+        </div>
+
+        <div class="contact-container">
+            <img src="bavitra.jpg" alt="Member 3 Photo">
+            <h3>Bavitra</h3>
+            <p><b>Product Manager</b></p>
+            <p class="contact-info">Email: bavitra73@gmail.com</p>
+            <p class="contact-info">Phone: +91 9363963840</p>
+        </div>
+
+        <div class="contact-container">
+            <img src="prabupicture.jpg" alt="Member 4 Photo">
+            <h3>Prabu</h3>
+            <p><b>Digital Marketing Manager</b></p>
+            <p class="contact-info">Email: ganeshprabu24@gmail.com</p>
+            <p class="contact-info">Phone: +91 7338703622</p>
+        </div>
+    </div>
+    <footer>
+       <h1><b>Toll free Helpline Number: ☎ 1800 88 99999</b></h1> 
+       <h1><center>🌐 www.example.com</center></h1> 
+    </footer>
+
+</body>
+</html>
+

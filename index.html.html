@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doodle Den - Stationery Shop</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: rgba(162, 114, 18, 0.668);
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: slategrey;
+            color: white;
+            padding: 1em 0;
+            text-align: center;
+        }
+        nav {
+            background-color: #444;
+            padding: 0.5em 0;
+            text-align: center;
+        }
+        nav a {
+            color: white;
+            margin: 0 1em;
+            text-decoration: none;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        .hero {
+            background: url('stationary.png') no-repeat center center/cover transparent ;
+            height: 400px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-shadow: 2px 2px 5px black;
+        }
+        .hero h1 {
+            color: rgb(255, 107, 107);
+            font-size: 3em;
+        }
+        .products {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 2em;
+        }
+        .product {
+            border: 1px solid #ddd;
+            margin: 20px;
+            padding: 1em;
+            text-align: center;
+            width: 200px;
+            position: relative;
+        }
+        .product img {
+            max-width: 100%;
+            transition: transform 0.2s;
+        }
+        .product img:hover {
+            transform: scale(1.5);
+        }
+        .product img.rotate {
+            transition: transform 0.2s;
+        }
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 1em 0;
+            margin-top: 2em;
+        }
+        .search-container {
+            margin: 20px;
+            text-align: center;
+        }
+        .search-container input[type="file"] {
+            display: none;
+        }
+        .search-container label {
+            background-color: #444;
+            color: white;
+            padding: 0.5em 1em;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .search-container input[type="text"] {
+            padding: 0.5em;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            width: 300px;
+        }
+        .search-container button {
+            padding: 0.5em 1em;
+            background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+
+        }
+        
+        .carrot{
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #333;
+            color: white;
+            padding: 15px;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .cart-modal {
+            display: none;
+            position: fixed;
+            top: 80px;  /* Below the cart icon */
+            right: 20px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(15, 63, 184, 0.862);
+            z-index: 1001;
+            width: 350px;
+            max-height: 80vh;
+            overflow-y: auto;
+            transform: none; 
+        }
+
+       
+        @media (max-width: 400px) {
+            .cart-modal {
+                width: 90%;
+                right: 5%;
+            }
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #ff4444;
+            color: white;
+            border-radius: 50%;
+            padding: 2px 6px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+            background: #f9f9f9;
+            margin-bottom: 5px;
+            border-radius: 5px;
+        }
+
+        .cart-button {
+            background: #7a8ced;
+            color: white;
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+            transition: background 0.3s;
+        }
+
+        .cart-button:hover {
+            background: #2179d7;
+        }
+
+        .payment-section {
+            display: none;
+            margin-top: 15px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background: #f9f9f9;
+        }
+
+        .cart-total {
+            margin: 15px 0;
+            padding: 10px;
+            background: #f0f0f0;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        .remove-button {
+            background: #ff4444;
+            color: white;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+        .remove-button:hover {
+            background: #ff6666;
+        }
+        .payment-section {
+            display: none;
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .cart-button {
+            background: teal;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+
+        .qr-code {
+            max-width: 200px;
+            margin: 20px auto;
+            display: block;
+        }
+
+        .card-input {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1><b>Doodle Den</b></h1>
+        <h3><center>Write your future with us – Where creativity meets quality!</center></h3>
+    </header>
+    <nav>
+        <a href="about2.html">About</a>
+        <a href="contact.html">Contact</a>
+    </nav>
+    <div class="hero">
+        <marquee><h1>🌟 Special Offer Alert! 🌟 We are thrilled to announce a 20% discount on all our products! 🛒 All items are now available at wholesale prices. 📦 Place your order now to take advantage of these fantastic savings. 💰 Hurry! This offer closes soon. ⏳</h1></marquee>
+    </div>
+    <div class="search-container">
+        <input type="file" id="image-upload" accept="image/*" capture="camera">
+        <label for="image-upload">Search by Image</label>
+        <input type="text" id="voice-search" placeholder="Search by Voice">
+        <button onclick="startVoiceSearch()">🎤</button>
+    </div>
+    <section class="products">
+        <!-- Notebooks -->
+        <div class="product">
+            <img src="classmate1.jpg" alt="CLASSMATE" class="zoom">
+            <h2>classic notebook CLASSMATE</h2>
+            <p>Rs.50/-</p>
+            <button onclick="addToCart('Notebook (Company A)', 50.00)">Add to Cart</button>
+        </div>
+        <div class="product">
+            <img src="strelm.jpg" alt="Notebook by Company B" class="zoom">
+            <h2>notebook with pen STRELM</h2>
+            <p>Rs.60/-</p>
+            <button onclick="addToCart('Notebook (Company B)',60.00)">Add to Cart</button>
+        </div>
+        <div class="product">
+            <img src="vintage ways.jpg" alt="Notebook by Company C" class="zoom">
+            <h2>stylish notebook VINTAGE WAYS</h2>
+            <p>Rs.60/-</p>
+            <button onclick="addToCart('Notebook (Company C)', 60.00)">Add to Cart</button>
+        </div>
+
+        <!-- Pens -->
+        <div class="product">
+            <img src="twitter pen.jpg" alt="Pen by Company A" class="zoom">
+            <h2>classic pens TWITTER</h2>
+            <p>Rs.50/-</p>
+            <button onclick="addToCart('Notebook (Company A)', 50.00)">Add to Cart</button>
+        </div>
+        <div class="product">
+            <img src="waterman pen.jpeg" alt="Pen by Company B" class="zoom">
+            <h2>ball point pens WATERMAN</h2>
+            <p>Rs.20/-</p>
+            <button onclick="addToCart('Notebook (Company B)', 20.00)">Add to Cart</button>
+        </div>
+        <div class="product">
+            <img src="needle tip pen parker.jpg" alt="Pen by Company C" class="zoom">
+            <h2>needle tip pen PARKER</h2>
+            <p>Rs.150/-</p>
+            <button onclick="addToCart('Notebook (Company c)', 150.00)">Add to Cart</button>
+        </div>
+
+        <!-- Markers -->
+        <div class="product">
+            <img src="pilot marker.jpg" alt="Marker by Company A" class="zoom">
+            <h2>Marker (Company A)</h2>
+            <p>Rs70.00</p>
+            <button onclick="addToCart('Notebook (Company A)', 70.00)">Add to Cart</button>
+        </div>
+        <div class="product">
+            <img src="pentel marker.webp" alt="Marker by Company B" class="zoom">
+            <h2>super Marker PENTEL</h2>
+            <p>RS.10/-</p>
+            <button onclick="addToCart('Notebook (Company B)', 10.00)">Add to Cart</button>
+        </div>
+        <div class="product">
+            <img src="crayola marker.jpeg" alt="Marker by Company C" class="zoom">
+            <h2>classic marker CRAYOLA</h2>
+            <p>Rs.20/-</p>
+            <button onclick="addToCart('Notebook (Company C)', 20.00)">Add to Cart</button>
+        </div>
+
+        <!-- Pencils -->
+        <div class="product">
+            <img src="pilot marker.jpg" alt="Pencil by Company A" class="zoom">
+            <h2>marker <br> PILOT</h2>
+            <p>Rs.15/-</p>
+            <button onclick="addToCart('Notebook (Company A)', 15.00)">Add to Cart</button>
+        </div>
+        <div class="product">
+            <img src="wooden pencils.jpg" alt="Pencil by Company B" class="zoom">
+            <h2>wooden pencils CRAYOLA</h2>
+            <p>RS.10/-</p>
+            <button onclick="addToCart('Notebook (Company B)', 10.00)">Add to Cart</button>
+        </div>
+        <div class="product">
+            <img src="natraj pencils.png" alt="Pencil by Company C" class="zoom">
+            <h2>super pencils NATRAJ</h2>
+            <p>Rs.20/-</p>
+            <button onclick="addToCart('Notebook (Company C)', 20.00)">Add to Cart</button>
+        </div>
+
+        <!-- Erasers -->
+        <div class="product">
+            <img src="pentel eraser.png" alt="Eraser by Company A" class="zoom">
+            <h2>hi-polymer eraser <br>PENTEL</h2>
+            <p>Rs.10/-</p>
+            <button onclick="addToCart('Notebook (Company A)', 10.00)">Add to Cart</button>
+        </div>
+        <div class="product">
+            <img src="pink pearl eraser.png" alt="Eraser by Company B" class="zoom">
+            <h2>Ink Eraser <br>PINK PEARL</h2>
+            <p>Rs.15/-</p>
+            <button onclick="addToCart('Notebook (Company B)', 15.00)">Add to Cart</button>
+        </div>
+        <!-- Rulers -->
+        <div class="product">
+            <img src="gc scales.png" alt="Ruler by Company A" class="zoom">
+            <h2>wooden ruler <br>GC ASSOCIATES</h2>
+            <p>RS.20/-</p>
+            <button onclick="addToCart('Notebook (Company A)', 20.00)">Add to Cart</button>
+        </div>
+        <div class="product">
+            <img src="clinsol scales.jpg" alt="Ruler by Company B" class="zoom">
+            <h2>transparent ruler CLINSOL</h2>
+            <p>Rs.15/-</p>
+            <button onclick="addToCart('Notebook (Company B)', 15.00)">Add to Cart</button>
+        </div>     
+    <!-- Adding Cart Icon -->
+    <div class="carrot" onclick="toggleCart()">
+        🛒 <span class="cart-count">0</span>
+    </div>
+
+    <!-- Cart Modal -->
+    <div class="modal-backdrop" onclick="hideCart()"></div>
+    <div class="cart-modal">
+        <h2>Your Cart</h2>
+        <div id="cart-items"></div>
+        <div class="cart-total">
+            <h3>Total: ₹<span id="cart-total">0.00</span></h3>
+        </div>
+        <button class="cart-button" onclick="proceedToCheckout()">Checkout</button>
+        <button class="cart-button" onclick="hideCart()">Continue Shopping</button>
+
+        <!-- Payment Sections -->
+        <div id="payment-options" style="display:none;">
+            <h3>Select Payment Method</h3>
+            <button class="cart-button" onclick="showPaymentMethod('cod')">Cash on Delivery</button>
+            <button class="cart-button" onclick="showPaymentMethod('card')">Card Payment</button>
+            <button class="cart-button" onclick="showPaymentMethod('upi')">UPI Payment</button>
+        </div>
+
+        <div id="cod-section" class="payment-section">
+            <h3>Cash on Delivery</h3>
+            <p>Your order will be delivered within 3-5 business days</p>
+            <button class="cart-button" onclick="generateInvoice()">Download Invoice</button>
+        </div>
+
+        <div id="card-section" class="payment-section">
+            <h3>Card Payment</h3>
+            <input type="text" class="card-input" placeholder="Card Number" maxlength="16">
+            <input type="text" class="card-input" placeholder="MM/YY" maxlength="5">
+            <input type="text" class="card-input" placeholder="CVV" maxlength="3">
+            <button class="cart-button" onclick="processCardPayment()">Pay Now</button>
+
+        </div>
+
+        <div id="upi-section" class="payment-section">
+            <h3>UPI Payment</h3>
+            <img src="payment.jpg" alt="QR Code" class="qr-code">
+            <p>Scan with any UPI app (GPay/PayTm/PhonePe)</p>
+            <button class="cart-button" onclick="processCardPayment()">Confirm Payment</button>
+
+
+        </div>
+    </div>
+
+    <!-- Your existing hero section and search container -->
+    <!-- ... -->
+
+    <!-- Modify product buttons to include onclick handler -->
+
+
+    <script>
+        let cart = [];
+        
+        function addToCart(name, price) {
+            cart.push({name, price});
+            updateCartDisplay();
+            updateCartCount();
+            alert('Item added to cart!');
+        }
+
+        function updateCartCount() {
+            document.querySelector('.cart-count').textContent = cart.length;
+        }
+
+        function updateCartDisplay() {
+            const cartItems = document.getElementById('cart-items');
+            cartItems.innerHTML = '';
+            let total = 0;
+
+            cart.forEach((item, index) => {
+                total += item.price;
+                cartItems.innerHTML += `
+                    <div class="cart-item">
+                        <span>${item.name} - $${item.price.toFixed(2)}</span>
+                        <button onclick="removeItem(${index})">Remove</button>
+                    </div>`;
+            });
+
+            document.getElementById('cart-total').textContent = total.toFixed(2);
+        }
+
+        function toggleCart() {
+            const modal = document.querySelector('.cart-modal');
+            const backdrop = document.querySelector('.modal-backdrop');
+            if (modal.style.display === 'none' || !modal.style.display) {
+                modal.style.display = 'block';
+                backdrop.style.display = 'block';
+                updateCartDisplay();
+            } else {
+                hideCart();
+            }
+        }
+
+        function hideCart() {
+            document.querySelector('.cart-modal').style.display = 'none';
+            document.querySelector('.modal-backdrop').style.display = 'none';
+            hideAllPaymentSections();
+        }
+
+        function removeItem(index) {
+            cart.splice(index, 1);
+            updateCartDisplay();
+            updateCartCount();
+        }
+
+        function proceedToCheckout() {
+            if (cart.length === 0) {
+                alert('Your cart is empty!');
+                return;
+            }
+            document.getElementById('payment-options').style.display = 'block';
+        }
+
+        function showPaymentMethod(method) {
+            hideAllPaymentSections();
+            document.getElementById(`${method}-section`).style.display = 'block';
+        }
+
+        function hideAllPaymentSections() {
+            document.getElementById('payment-options').style.display = 'none';
+            document.getElementById('cod-section').style.display = 'none';
+            document.getElementById('card-section').style.display = 'none';
+            document.getElementById('upi-section').style.display = 'none';
+        }
+
+        function generateInvoice() {
+            
+            let invoiceContent = `
+                LIMITED EDITION STATIONERY SHOP
+                INVOICE
+                ----------------------------------------
+                Date: ${new Date().toLocaleDateString()}
+                Time: ${new Date().toLocaleTimeString()}
+                Items:
+                ${cart.map(item => `${item.name} - $${item.price.toFixed(2)}`).join('\n')}
+                
+                ----------------------------------------
+                Total: $${cart.reduce((sum, item) => sum + item.price, 0).toFixed(2)}
+                 
+                
+                Thank you for shopping with us!
+                
+            
+            `;
+            
+            
+            const blob = new Blob([invoiceContent], {type: 'text/plain'});
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `invoice-${Date.now()}.txt`;
+            a.click();
+            
+            completeOrder();
+        }
+
+        function processCardPayment() {
+            alert('Payment processed successfully!');
+            completeOrder();
+        }
+
+        function completeOrder() {
+            cart = [];
+            updateCartCount();
+            updateCartDisplay();
+            hideCart();
+            alert('Thank you for your order!');
+        }
+
+        
+
+        // Your existing voice search function
+        function startVoiceSearch() {
+            alert('Voice search feature coming soon!');
+        }
+    </script>
+</body>
+</html>
